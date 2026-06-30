@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<form class="formulario"
+      method="post"
+      action="{% if game %}/games/{{ game.id }}/editar{% else %}/games{% endif %}">
+
+  <label>Nome
+    <input type="text" name="nome"
+           value="{{ game.nome if game else '' }}" required>
+  </label>
+
+  <label>Gênero
+    <input type="text" name="genero"
+           value="{{ game.genero if game else '' }}" required>
+  </label>
+
+  <label>Ano
+    <input type="number" name="ano"
+           value="{{ game.ano if game else '' }}" required>
+  </label>
+
+  <label class="checkbox">
+    <input type="checkbox" name="zerado"
+      {% if game and game.zerado %}checked{% endif %}>
+    Zerado
+  </label>
+
+  <button class="btn" type="submit">Salvar</button>
+
+</form>
+
+{% endblock %}

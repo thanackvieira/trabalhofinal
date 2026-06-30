@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<div class="grade">
+
+  {% for game in games %}
+
+  <article class="card">
+
+    <h2>{{ game.nome }}</h2>
+
+    <p class="meta">{{ game.genero }} · {{ game.ano }}</p>
+
+    <p class="status {{ 'zerado' if game.zerado else 'nao-zerado' }}">
+      {{ '✅ Zerado' if game.zerado else '⏳ Não zerado' }}
+    </p>
+
+    <div class="acoes">
+      <a class="btn" href="/games/{{ game.id }}/editar">Editar</a>
+
+      <form action="/games/{{ game.id }}/excluir" method="post">
+        <button class="btn btn-perigo" type="submit">Excluir</button>
+      </form>
+    </div>
+
+  </article>
+
+  {% else %}
+    <p>Nenhum jogo cadastrado ainda.</p>
+  {% endfor %}
+
+</div>
+
+{% endblock %}
